@@ -45,6 +45,8 @@ RUN \
     cd /home/wekan/app && \
     npm install && \
     find /home/wekan/.meteor/$(dirname $(readlink /home/wekan/.meteor/meteor)) -name "node" && \
+    # NOTES: the following hack is to work around a strange bug in git action
+    sed -i -e 's/SCRIPT_DIR/SCRIPT_DIR_OOPS/g' /home/wekan/.meteor/meteor && \
     /home/wekan/.meteor/meteor build --directory /home/wekan/app_build && \
     cd /home/wekan/app_build/bundle/programs/server/ && chmod u+w *.json && npm install && \
     cd node_modules/fibers && node build.js && \
