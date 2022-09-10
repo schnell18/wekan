@@ -41,6 +41,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          platform: linux/amd64
+          platforms: linux/amd64
           push: true
           tags: schnell18/wekan:${{ steps.image_tags.outputs.IMAGE_TAGS }}
