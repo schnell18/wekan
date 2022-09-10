@@ -46,6 +46,7 @@ RUN \
     npm install && \
     # NOTES: the following hack is to work around a strange bug in git action
     DEV_BUNDLE_DIR=/home/wekan/.meteor/$(dirname $(readlink /home/wekan/.meteor/meteor))/dev_bundle && \
+    find $DEV_BUNDLE_DIR && \
     sed -i -e "s|\$DEV_BUNDLE|$DEV_BUNDLE_DIR|g" /home/wekan/.meteor/meteor && \
     cat /home/wekan/.meteor/meteor && \
     /home/wekan/.meteor/meteor build --directory /home/wekan/app_build && \
