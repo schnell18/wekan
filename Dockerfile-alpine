@@ -45,7 +45,8 @@ RUN \
     cd /home/wekan/app && \
     npm install && \
     # NOTES: the following hack is to work around a strange bug in git action
-    sed -i -e 's/SCRIPT_DIR/OOPS_SCRIPT_DIR/g' /home/wekan/.meteor/meteor && \
+    # DEV_BUNDLE_DIR=/home/wekan/.meteor/$(dirname $(readlink /home/wekan/.meteor/meteor))/dev_bundle
+    sed -i -e "s/\$DEV_BUNDLE//home/wekan/.meteor/packages/meteor-tool/2.7.3/mt-os.linux.x86_64/dev_bundle/g" /home/wekan/.meteor/meteor && \
     cat /home/wekan/.meteor/meteor && \
     /home/wekan/.meteor/meteor build --directory /home/wekan/app_build && \
     cd /home/wekan/app_build/bundle/programs/server/ && chmod u+w *.json && npm install && \
