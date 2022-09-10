@@ -44,6 +44,7 @@ RUN \
     mkdir -p /home/wekan/.npm && \
     cd /home/wekan/app && \
     npm install && \
+    ls -lh /home/wekan/.meteor/meteor && \
     /home/wekan/.meteor/meteor build --directory /home/wekan/app_build && \
     cd /home/wekan/app_build/bundle/programs/server/ && chmod u+w *.json && npm install && \
     cd node_modules/fibers && node build.js && \
