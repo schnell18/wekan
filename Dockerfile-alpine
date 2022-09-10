@@ -30,28 +30,28 @@ RUN \
     # Install Node
     mkdir -p /opt/nodejs/lib/node_modules/fibers/.node-gyp /root/.node-gyp/${NODE_VERSION} /home/wekan/.config && \
     # Install Node dependencies. Python path for node-gyp.
-    npm install -g npm@${NPM_VERSION} && \
+    npm install -g npm@${NPM_VERSION}
+
+RUN \
     # Change user to wekan and install meteor
     cd /home/wekan/ && \
     echo "Starting meteor ${METEOR_RELEASE} installation...   \n" && \
     curl https://install.meteor.com/ | /bin/sh && \
-    mv /root/.meteor /home/wekan/ && \
-    cd /home/wekan/.meteor && \
+    mv /root/.meteor /home/wekan/
+
+RUN \
     # Build app
-    cd /home/wekan/app && \
     mkdir -p /home/wekan/.npm && \
+    cd /home/wekan/app && \
     npm install && \
     /home/wekan/.meteor/meteor build --directory /home/wekan/app_build && \
-    cd /home/wekan/app_build/bundle/programs/server/ && \
-    chmod u+w *.json && \
-    npm install && \
-    cd node_modules/fibers && \
-    node build.js && \
+    cd /home/wekan/app_build/bundle/programs/server/ && chmod u+w *.json && npm install && \
+    cd node_modules/fibers && node build.js && \
     cd ../.. && \
     # Remove legacy webbroser bundle, so that Wekan works also at
     # Android Firefox, iOS Safari, etc.
     rm -rf /home/wekan/app_build/bundle/programs/web.browser.legacy && \
-    mv /home/wekan/app_build/bundle /build && \
+    mv /home/wekan/app_build/bundle /build
 
 FROM docker.io/library/node:14-alpine3.15
 LABEL maintainer="wekan"
