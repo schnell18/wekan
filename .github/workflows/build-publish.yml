@@ -38,8 +38,14 @@ jobs:
 
       -
         name: Build and push
+        id: build-and-push
         uses: docker/build-push-action@v3
         with:
           platforms: linux/amd64
           push: true
-          tags: schnell18/wekan:${{ steps.image_tags.outputs.IMAGE_TAGS }}
+          tags: quay.io/schnell18/wekan:${{ steps.image_tags.outputs.IMAGE_TAGS }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Print image url
+        run: echo "Image pushed to ${{ steps.build-and-push.outputs.imageid }}"
