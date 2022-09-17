@@ -81,7 +81,7 @@ Avatars = new FilesCollection({
     return ret;
   },
   onBeforeUpload(file) {
-    console.log("file size is: " + file.size + " file type is: " + file.type)
+    console.log("avatarsUploadSize is: " + avatarsUploadSize + "file size is: " + file.size + " file type is: " + file.type)
     if (file.size <= avatarsUploadSize && file.type.startsWith('image/')) {
       return true;
     }
