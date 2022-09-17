@@ -140,6 +140,7 @@ BlazeComponent.extendComponent({
       $and: [
         { archived: false },
         { type: { $in: ['board', 'template-container'] } },
+        { title: {$not: {$regex: /^\^.*\^$/}}},
         { $or: [] }
       ]
     };
