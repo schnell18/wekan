@@ -5,6 +5,7 @@ on:
     branches:
       - 'master'
       - 'feat/subpath'
+      - 'feat/subpath-build'
 
 jobs:
   docker:
